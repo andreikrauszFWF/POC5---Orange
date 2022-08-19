@@ -82,6 +82,24 @@
         "testCaseId": "15572a39-061b-4e9e-88dd-98d0e81fc982",
         "testCaseType": "TestCase",
         "fileName": "Tests\\WorkflowTestCaseTemplate.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "871b6b2e-2812-4c7b-8ad9-b623d44687b2",
+        "testCaseType": "TestCase",
+        "fileName": "Tests\\TestCase_Payments_Read.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "901e7272-9912-4d24-83e2-4ae9c18cfd25",
+        "testCaseType": "TestCase",
+        "fileName": "Tests\\TestCase_Extracted_RemoveRows.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "82a68f88-9e18-40f3-97c9-82715748b784",
+        "testCaseType": "TestCase",
+        "fileName": "DataLayer\\TestCase_Companii_Create.xaml"
       }
     ],
     "modernBehavior": false
