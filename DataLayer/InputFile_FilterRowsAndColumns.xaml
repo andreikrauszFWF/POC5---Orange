@@ -38,6 +38,8 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Xml.Serialization</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -67,6 +69,9 @@
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Workflow to remove rwos that have value &gt; 0 in maternal / maternity columns and those that where column &quot;nr ore luna&quot; =0." DisplayName="Workflow to Remove Rows from Extracted Data Table" sap:VirtualizedContainerService.HintSize="480.666666666667,808.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -79,10 +84,14 @@
     <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Extracted_RemoveRows  workflow has started.&quot;]" />
     <TryCatch DisplayName="Try Catch for Invoke Code" sap:VirtualizedContainerService.HintSize="438.666666666667,402" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <ui:InvokeCode ContinueOnError="{x:Null}" Code="'VB.NET code for keeping only rows that have the following conditions: CM MATERNITATE = 0 and CM RISC MATERNAL = 0 and NR ORE LUNA &gt; 0 and CUUI &lt;&gt; &quot;&quot;;&#xA;io_DtExtractedData = io_DtExtractedData.AsEnumerable.Where(Function(r) CInt(r(&quot;CM MATERNITATE&quot;)) = 0 AndAlso CInt(r(&quot;CM RISC MATERNAL&quot;)) = 0 AndAlso CInt(r(&quot;NR ORE LUNA&quot;)) &gt; 0 AndAlso r(&quot;CUI&quot;) IsNot &quot;&quot;).CopyToDataTable&#xA;&#xA;'VB.NET code to modify value of column &quot;PARTE VARIABILA NET&quot; to 0 if the initial value is between 0 and 99,99;&#xA;For Each row As DataRow In io_DtExtractedData.Rows&#xA;&#x9;If CInt(row(&quot;PARTE VARIABILA NET&quot;)) &lt; 100 AndAlso CInt(row(&quot;PARTE VARIABILA NET&quot;)) &gt; 0 Then&#xA;&#x9;&#x9;row(&quot;PARTE VARIABILA NET&quot;) = 0&#xA;&#x9;End If&#xA;Next&#xA;&#xA;'VB.NET code to keep only the columns specified in the config file;&#xA;Dim DtTempDataTable As DataTable&#xA;DtTempDataTable = io_DtExtractedData.Copy&#xA;For Each column As DataColumn In DtTempDataTable.Columns&#xA;&#x9;If Not in_Config(&quot;ColumnsToBeKept&quot;).ToString.ToLower.Trim.Split(&quot;,&quot;c).Contains(column.ColumnName.ToLower.Trim) Then&#xA;&#x9;&#x9;io_DtExtractedData.Columns.Remove(column.ColumnName)&#xA;&#x9;End If&#xA;Next" DisplayName="Invoke code used for filtering the data table" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="'VB.NET code for keeping only rows that have the following conditions: CM MATERNITATE = 0 and CM RISC MATERNAL = 0 and NR ORE LUNA &gt; 0 and CUUI &lt;&gt; &quot;&quot;;&#xD;&#xA;io_DtExtractedData = io_DtExtractedData.AsEnumerable.Where(Function(r) CInt(r(&quot;CM MATERNITATE&quot;)) = 0 AndAlso CInt(r(&quot;CM RISC MATERNAL&quot;)) = 0 AndAlso CInt(r(&quot;NR ORE LUNA&quot;)) &gt; 0 AndAlso r(&quot;CUI&quot;) IsNot &quot;&quot;).CopyToDataTable&#xD;&#xA;&#xD;&#xA;'VB.NET code to modify value of column &quot;PARTE VARIABILA NET&quot; to 0 if the initial value is between 0 and 99,99;&#xD;&#xA;For Each row As DataRow In io_DtExtractedData.Rows&#xD;&#xA;&#x9;If CInt(row(&quot;PARTE VARIABILA NET&quot;)) &lt; 100 AndAlso CInt(row(&quot;PARTE VARIABILA NET&quot;)) &gt; 0 Then&#xD;&#xA;&#x9;&#x9;row(&quot;PARTE VARIABILA NET&quot;) = 0&#xD;&#xA;&#x9;End If&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;'VB.NET code to keep only the columns specified in the config file;&#xD;&#xA;Dim DtTempDataTable As DataTable&#xD;&#xA;DtTempDataTable = io_DtExtractedData.Copy&#xD;&#xA;For Each column As DataColumn In DtTempDataTable.Columns&#xD;&#xA;&#x9;If Not in_ColumnsToBeKept.ToString.ToLower.Trim.Split(&quot;,&quot;c).Contains(column.ColumnName.ToLower.Trim) Then&#xD;&#xA;&#x9;&#x9;io_DtExtractedData.Columns.Remove(column.ColumnName)&#xD;&#xA;&#x9;End If&#xD;&#xA;Next" DisplayName="Invoke code used for filtering the data table" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
           <ui:InvokeCode.Arguments>
-            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtExtractedData">[io_DtExtractedData]</InOutArgument>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtExtractedData">
+              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_DtExtractedData" />
+            </InOutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_ColumnsToBeKept">
+              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;ColumnsToBeKept&quot;).ToString" />
+            </InArgument>
           </ui:InvokeCode.Arguments>
         </ui:InvokeCode>
       </TryCatch.Try>

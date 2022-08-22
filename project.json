@@ -99,7 +99,7 @@
         "editingStatus": "InProgress",
         "testCaseId": "82a68f88-9e18-40f3-97c9-82715748b784",
         "testCaseType": "TestCase",
-        "fileName": "DataLayer\\TestCase_Companii_Create.xaml"
+        "fileName": "Tests\\TestCase_Companii_Create.xaml"
       }
     ],
     "modernBehavior": false
