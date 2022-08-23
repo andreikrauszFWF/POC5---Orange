@@ -1,6 +1,7 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ListOfCUIs_Extract" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_DtExtractedData" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_dtExtractedData" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_ListOfCUIs" Type="OutArgument(scg:List(x:String))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -61,42 +62,36 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ListOfCUIs_Extract" sap:VirtualizedContainerService.HintSize="476,426.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow to create" DisplayName="ListOfCUIs_Extract" sap:VirtualizedContainerService.HintSize="376,556" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:Object)" Default="[New List(Of Object)]" Name="bigListOfCUIs" />
-      <Variable x:TypeArguments="scg:IEnumerable(x:Object)" Default="[Enumerable.Empty(Of Object)]" Name="smallListOfCUIs" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_DtExtractedData]" DisplayName="Extract the CUI from each row and save it to the BIG list of CUI's" sap:VirtualizedContainerService.HintSize="434,232.666666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
-      <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="Row" />
-          </ActivityAction.Argument>
-          <Sequence sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_2">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <AddToCollection x:TypeArguments="x:Object" Collection="[bigListOfCUIs]" DisplayName="Add the value of CUI to the BIG list" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[Row(&quot;CUI&quot;).ToString]" />
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEachRow.Body>
-    </ui:ForEachRow>
-    <Assign DisplayName="Add distinct CUI's to small CUI list" sap:VirtualizedContainerService.HintSize="434,62" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="scg:IEnumerable(x:Object)">[smallListOfCUIs]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="scg:IEnumerable(x:Object)">[bigListOfCUIs.Distinct()]</InArgument>
-      </Assign.Value>
-    </Assign>
+    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ListOfCUIs_Extract  workflow has started.&quot;]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'VB.NET code for creating a list of CUIs from the given data table&#xD;&#xA;out_listOfCUIs = New List(Of String)&#xD;&#xA;out_listOfCUIs = (From row As DataRow In in_DtExtractedData Select CStr(row.Item(&quot;CUI&quot;))).ToList&#xD;&#xA;out_ListOfCUIs = out_ListOfCUIs.Distinct().ToList" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ListOfCUIs">
+          <mva:VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="out_ListOfCUIs" />
+        </OutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtExtractedData">
+          <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_DtExtractedData" />
+        </InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;ListOfCUIs_Extract  workflow has ended.&quot;]" />
   </Sequence>
 </Activity>
