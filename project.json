@@ -112,6 +112,12 @@
         "testCaseId": "8799ae8d-4277-4b0a-ba9d-5f37742b09b4",
         "testCaseType": "TestCase",
         "fileName": "Tests\\TestCases\\TestCase_MaxMinMed_Create.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "4108def1-7bb2-4dcb-90af-fcc3935222c3",
+        "testCaseType": "TestCase",
+        "fileName": "Tests\\TestCases\\TestCase_MaxMinMed_WriteTo.xaml"
       }
     ],
     "modernBehavior": false

@@ -58,7 +58,6 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
@@ -84,12 +83,8 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TestCase_InputFile_FilterRowsAndColumns workflow" sap:VirtualizedContainerService.HintSize="379.333333333333,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Tests\TestCases\TestCase_InputFile_FilterRowsAndColumns.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_FilteredData">
-            <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtFilteredData" />
-          </OutArgument>
-          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">
-            <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-          </InArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_FilteredData">[dtFilteredData]</OutArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[Config]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>
@@ -101,12 +96,8 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke MaxMinMed_Create workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="DataLayer\MaxMinMed_Create.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMinMaxMed">
-            <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtMinMaxMed" />
-          </OutArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtFilteredData">
-            <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtFilteredData" />
-          </InArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMinMaxMed">[dtMinMaxMed]</OutArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtFilteredData">[dtFilteredData]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>

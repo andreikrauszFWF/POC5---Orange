@@ -1,4 +1,5 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TestCase_Companii_Create" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1206,1569.33333333333" sap2010:WorkflowViewState.IdRef="TestCase_Companii_Create_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Activity mc:Ignorable="sap sap2010" x:Class="TestCase_Companii_Create" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1206,1858" sap2010:WorkflowViewState.IdRef="TestCase_Companii_Create_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -62,7 +63,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TestCase_Companii_Create" sap:VirtualizedContainerService.HintSize="518,1504.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TestCase_Companii_Create" sap:VirtualizedContainerService.HintSize="518,1793.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtExtractedData" />
@@ -87,7 +88,7 @@
           <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[Config]</OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Payments_Read workflow" sap:VirtualizedContainerService.HintSize="364,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="DataLayer\InputFile_Read.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Payments_Read workflow" sap:VirtualizedContainerService.HintSize="364,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ServiceLayer\InputFile_Read.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtExtractedData">[dtExtractedData]</OutArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_InputFilePath">C:\Users\AndreiKrausz\Desktop\stat plata extins.xlsx</InArgument>
@@ -101,28 +102,24 @@
       </ui:InvokeWorkflowFile>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ListOfCUIs_Extract workflow" sap:VirtualizedContainerService.HintSize="364,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="DataLayer\ListOfCUIs_Extract.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtExtractedData">
-            <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtExtractedData" />
-          </InArgument>
-          <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ListOfCUIs">
-            <mva:VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="listOfCUIs" />
-          </OutArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtExtractedData">[dtExtractedData]</InArgument>
+          <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_ListOfCUIs">[listOfCUIs]</OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>
-    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="476,580" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="476,868.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,488" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listOfCUIs]">
+      <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,776.666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listOfCUIs]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="x:Object" Name="cui" />
             </ActivityAction.Argument>
-            <Sequence sap:VirtualizedContainerService.HintSize="376,360" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <Sequence sap:VirtualizedContainerService.HintSize="376,648.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -130,26 +127,22 @@
               </sap:WorkflowViewStateService.ViewState>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TableForEachCUI_Create workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="DataLayer\TableForEachCUI_Create.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_CUI">
-                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="cui.ToString" />
-                  </InArgument>
-                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForEachCUI">
-                    <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtForEachCUI" />
-                  </OutArgument>
-                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ExtractedData">
-                    <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtExtractedData" />
-                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_CUI">[cui.ToString]</InArgument>
+                  <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForEachCUI">[dtForEachCUI]</OutArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_ExtractedData">[dtExtractedData]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Companii_Create workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataLayer\Companii_Create.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_CompaniiPath">
-                    <Literal x:TypeArguments="x:String">C:\Users\AndreiKrausz\Desktop\testCompanii.xlsx</Literal>
-                  </InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="in_CUI">
-                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="cui.ToString" />
-                  </InArgument>
-                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_TableForEachCUI">
+                  <InArgument x:TypeArguments="x:String" x:Key="in_CompaniiPath">C:\Users\AndreiKrausz\Desktop\testCompanii.xlsx</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_CUI">[cui.ToString]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_TableForEachCUI">[dtForEachCUI]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[cui.ToString]" />
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke MaxMinMed_WriteTo workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="DataLayer\MaxMinMed_WriteTo.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtForEachCUI">
                     <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtForEachCUI" />
                   </InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
