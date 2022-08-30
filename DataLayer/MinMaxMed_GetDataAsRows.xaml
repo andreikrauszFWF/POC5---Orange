@@ -1,0 +1,121 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="MinMaxMed_Get" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_DtSourceData" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_Type" Type="InArgument(x:String)" />
+    <x:Property Name="out_DtMinMaxMedType" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_DtForDepMed" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>567.333333333333,890</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>MinMaxMed_Get_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Workflow to get the min, max, and median for each column in a given data table. After geting the values, we store each one in  a new data row for each kind (min, max med), then add each row to a new DT out argument." DisplayName="MinMaxMed_Get" sap:VirtualizedContainerService.HintSize="480.666666666667,825.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;DtForEachType_Create workflow has started.&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,402" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Console.WriteLine(&quot;Before var declarations&quot;)&#xD;&#xA;&#xD;&#xA;Dim colList As New List(Of Double)&#xD;&#xA;Dim minList As  New List(Of String)&#xD;&#xA;Dim maxList  As  New List(Of String)&#xD;&#xA;Dim medList As  New List(Of String)&#xD;&#xA;Dim indexColumn As New Int32&#xD;&#xA;Dim medindex As New Int32&#xD;&#xA;&#xD;&#xA;indexColumn = 3&#xD;&#xA;&#xD;&#xA;Console.WriteLine(&quot;After var declarations&quot;)&#xD;&#xA;Console.WriteLine(&quot;Before creating rows&quot;)&#xD;&#xA;&#xD;&#xA;minList.Add(&quot;&quot;)&#xD;&#xA;minList.Add(&quot;MIN&quot;)&#xD;&#xA;maxList.Add(in_Type)&#xD;&#xA;maxList.Add(&quot;MAX&quot;)&#xD;&#xA;medList.Add(&quot;&quot;)&#xD;&#xA;medList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;Console.WriteLine(&quot;After creating rows&quot;)&#xD;&#xA;Console.WriteLine(&quot;Before while loop&quot;)&#xD;&#xA;&#xD;&#xA;While  indexColumn &lt; in_DtSourceData.Columns.Count&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before For Loop&quot;)&#xD;&#xA;&#x9;For Each row As DataRow In in_DtSourceData.AsEnumerable.Skip(2)&#xD;&#xA;&#x9;&#x9;&#x9;colList.Add(CDbl(row(indexColumn)))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before For Loop&quot;)&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before sort list&quot;)&#xD;&#xA;&#x9;colList.Sort&#xD;&#xA;&#x9;minList.Add(colList.Min.ToString)&#xD;&#xA;&#x9;maxList.Add(colList.Max.ToString)&#xD;&#xA;&#x9;Console.WriteLine(&quot;After sort list&quot;)&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before If statement&quot;)&#xD;&#xA;&#x9;If colList.Count &lt; 2 Then&#xD;&#xA;&#x9;&#x9;medList.Add(CStr(colList(0)))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before Else If&quot;)&#xD;&#xA;&#x9;If colList.Count Mod 2 = 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;medList.Add(CStr((colList(medIndex) + colList(medindex -1))/2))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before Else&quot;)&#xD;&#xA;&#x9;If colList.Count Mod 2 &lt;&gt; 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;medList.Add(CStr(colList(medIndex)))&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before End If&quot;)&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;indexColumn = indexColumn + 1&#xD;&#xA;&#x9;Console.WriteLine(&quot;After If statement&quot;)&#xD;&#xA;&#x9;&#xD;&#xA;End While&#xD;&#xA;&#xD;&#xA;Console.WriteLine(&quot;After while loop&quot;)&#xD;&#xA;&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add(minList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add1&quot;)&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add(maxList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add2&quot;)&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add(medList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add3&quot;)&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add()&#xD;&#xA;Console.WriteLine(&quot;add4&quot;)&#xD;&#xA;&#xD;&#xA;out_DtForDepMed.Rows.Add(medList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add5&quot;)" DisplayName="Get min max med for each column and save to new DT" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+          <ui:InvokeCode.Arguments>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">
+              <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_DtSourceData" />
+            </InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Type">
+              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Type" />
+            </InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMinMaxMedForType">
+              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_DtMinMaxMedType" />
+            </OutArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForDepMed">
+              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_DtForDepMed" />
+            </OutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[exception.InnerException.ToString]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;DtForEachType_Create workflow has ended.&quot;]" />
+  </Sequence>
+</Activity>

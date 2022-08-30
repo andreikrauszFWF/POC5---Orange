@@ -1,14 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TableForEachCUI_Create" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="DtWithHeaders_AddTo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_CUI" Type="InArgument(x:String)" />
-    <x:Property Name="out_DtForEachCUI" Type="OutArgument(sd:DataTable)" />
-    <x:Property Name="in_ExtractedData" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_DtForThisCUI" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_DtToBeClonedFrom" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_DtMinMaxMedWithoutHeaders" Type="InArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1206,817.333333333333</sap:VirtualizedContainerService.HintSize>
-  <sap2010:WorkflowViewState.IdRef>TableForEachCUI_Create_1</sap2010:WorkflowViewState.IdRef>
+  <sap:VirtualizedContainerService.HintSize>1207.33333333333,817.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>DtWithHeaders_AddTo_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -62,27 +62,20 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
-      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>NPOI</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TableForEachCUI_Create" sap:VirtualizedContainerService.HintSize="304,154" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DtWithHeaders_AddTo" sap:VirtualizedContainerService.HintSize="376,256" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Copy rows with current CUI to new DT" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="sd:DataTable">[out_DtForEachCUI]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="sd:DataTable">[in_ExtractedData.AsEnumerable.Where(Function (row) row("CUI").ToString.Contains(in_CUI)).CopyToDataTable]</InArgument>
-      </Assign.Value>
-    </Assign>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_DtForThisCUI = in_DtToBeClonedFrom.Clone&#xD;&#xA;out_DtForThisCUI.Columns.Remove(&quot;FUNCTIE&quot;)&#xD;&#xA;out_DtForThisCUI.Columns(&quot;Department&quot;).ColumnName = &quot;Type&quot;&#xD;&#xA;out_DtForThisCUI.Columns(&quot;Subdepartment&quot;).ColumnName = &quot;Value&quot;&#xD;&#xA;&#xD;&#xA;out_DtForThisCUI.Merge(in_DtMinMaxMedWithoutHeaders)" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForThisCUI">[out_DtForThisCUI]</OutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtMinMaxMedWithoutHeaders">[in_DtMinMaxMedWithoutHeaders]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtToBeClonedFrom">[in_DtToBeClonedFrom]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
   </Sequence>
 </Activity>

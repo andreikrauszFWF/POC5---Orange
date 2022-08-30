@@ -85,39 +85,33 @@
       },
       {
         "editingStatus": "InProgress",
-        "testCaseId": "82a68f88-9e18-40f3-97c9-82715748b784",
-        "testCaseType": "TestCase",
-        "fileName": "Tests\\TestCases\\TestCase_TableForEachCUI_Create.xaml"
-      },
-      {
-        "editingStatus": "InProgress",
-        "testCaseId": "cf008e82-ded4-41c3-8e41-ed5df3841f8c",
-        "testCaseType": "TestCase",
-        "fileName": "Tests\\TestCases\\TestCase_ListOfCUIs_Extract.xaml"
-      },
-      {
-        "editingStatus": "InProgress",
-        "testCaseId": "871b6b2e-2812-4c7b-8ad9-b623d44687b2",
+        "testCaseId": "ef303fe1-12c7-4ec5-9a26-860a0d6a45bd",
         "testCaseType": "TestCase",
         "fileName": "Tests\\TestCases\\TestCase_InputFile_Read.xaml"
       },
       {
         "editingStatus": "InProgress",
-        "testCaseId": "901e7272-9912-4d24-83e2-4ae9c18cfd25",
+        "testCaseId": "daabb0ed-7c69-4d44-b505-6bd53d442a95",
         "testCaseType": "TestCase",
         "fileName": "Tests\\TestCases\\TestCase_InputFile_FilterRowsAndColumns.xaml"
       },
       {
         "editingStatus": "InProgress",
-        "testCaseId": "8799ae8d-4277-4b0a-ba9d-5f37742b09b4",
+        "testCaseId": "685cbb42-6543-41e9-b2a8-b714f7972d5b",
         "testCaseType": "TestCase",
-        "fileName": "Tests\\TestCases\\TestCase_MaxMinMed_Create.xaml"
+        "fileName": "Tests\\TestCases\\TestCase_HashsetForEachType.xaml"
       },
       {
         "editingStatus": "InProgress",
-        "testCaseId": "4108def1-7bb2-4dcb-90af-fcc3935222c3",
+        "testCaseId": "58b1bbf5-f073-4139-895a-3892c03aa84f",
         "testCaseType": "TestCase",
-        "fileName": "Tests\\TestCases\\TestCase_MaxMinMed_WriteTo.xaml"
+        "fileName": "Tests\\TestCases\\TestCase_DtForEachType_Create.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "8ce08961-ed19-4a3e-b9b2-9441e5c96b60",
+        "testCaseType": "TestCase",
+        "fileName": "DataLayer\\TestCase_MinMaxMed_GetDataAsRows.xaml"
       }
     ],
     "modernBehavior": false
