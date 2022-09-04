@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1079.33333333333,890</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>630,788</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>HashsetForEachType_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -69,7 +69,6 @@
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
@@ -83,7 +82,7 @@
     <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;HashsetForEachType workflow has started.&quot;]" />
     <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,300" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <TryCatch.Try>
-        <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign DisplayName="Create new hashset with the given selection" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_2">
           <Assign.To>
             <OutArgument x:TypeArguments="scg:HashSet(x:String)">[out_HashsetForType]</OutArgument>
           </Assign.To>

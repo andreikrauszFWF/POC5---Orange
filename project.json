@@ -111,7 +111,7 @@
         "editingStatus": "InProgress",
         "testCaseId": "8ce08961-ed19-4a3e-b9b2-9441e5c96b60",
         "testCaseType": "TestCase",
-        "fileName": "DataLayer\\TestCase_MinMaxMed_GetDataAsRows.xaml"
+        "fileName": "Tests\\TestCases\\TestCase_MinMaxMed_GetDataAsRows.xaml"
       }
     ],
     "modernBehavior": false

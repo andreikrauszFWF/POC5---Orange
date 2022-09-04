@@ -1,15 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="DtWithHeaders_AddTo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="DtMinMaxMedwithHeaders_Create" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_MaxList" Type="InArgument(scg:List(x:String))" />
-    <x:Property Name="in_MinList" Type="InArgument(scg:List(x:String))" />
-    <x:Property Name="in_MedList" Type="InArgument(scg:List(x:String))" />
-    <x:Property Name="io_DtMinMaxMedForCUI" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_DtToBeCloned" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_DtMinMaxMedWithHeaders" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>630,762</sap:VirtualizedContainerService.HintSize>
-  <sap2010:WorkflowViewState.IdRef>DtWithHeaders_AddTo_1</sap2010:WorkflowViewState.IdRef>
+  <sap:VirtualizedContainerService.HintSize>630,858.666666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>DtMinMaxMedwithHeaders_Create_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -64,31 +62,29 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow to add new rows to the specified DT with headers.&#xD;&#xA;We use Min Max and Med lists as input for rows." DisplayName="DtWithHeaders_AddTo" sap:VirtualizedContainerService.HintSize="480.666666666667,808.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow to create an empty datatable that contains only the specififed columns." DisplayName="Create Dt for MinMaxMed with Headers" sap:VirtualizedContainerService.HintSize="480.666666666667,794" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;DtWithHeaders_AddTo workflow has started.&quot;]" />
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,402" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;DtMinMaxMedwithHeaders_Create workflow has started.&quot;]" />
+    <TryCatch DisplayName="Try to run the vb.net code for creating DT with headers and Catch SysEx" sap:VirtualizedContainerService.HintSize="438.666666666667,402" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <ui:InvokeCode ContinueOnError="{x:Null}" Code="io_DtMinMaxMedForCUI.Rows.Add(&quot;&quot;)&#xA;io_DtMinMaxMedForCUI.Rows.Add(in_MinList.ToArray)&#xA;io_DtMinMaxMedForCUI.Rows.Add(in_MaxList.ToArray)&#xA;io_DTMinMaxMedForCUI.Rows.Add(in_MedList.ToArray)&#xA;" DisplayName="Code for adding new rows to DT with headers " sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_DtMinMaxMedWithHeaders = in_DtToBeCloned.Clone&#xA;out_DtMinMaxMedWithHeaders.Columns.Remove(&quot;FUNCTIE&quot;)&#xA;out_DtMinMaxMedWithHeaders.Columns(&quot;Departament&quot;).ColumnName = &quot;Type&quot;&#xA;out_DtMinMaxMedWithHeaders.Columns(&quot;Subdepartament&quot;).ColumnName = &quot;Value&quot;&#xA;out_DtMinMaxMedWithHeaders.Rows.Add(&quot;&quot;)&#xA;&#xA;" DisplayName="vb.net code to create and adjust DT with only headers." sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
           <ui:InvokeCode.Arguments>
-            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtMinMaxMedForCUI">[io_DtMinMaxMedForCUI]</InOutArgument>
-            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MinList">[in_MinList]</InArgument>
-            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MaxList">[in_MaxList]</InArgument>
-            <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MedList">[in_MedList]</InArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtToBeCloned">[in_DtToBeCloned]</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMinMaxMedWithHeaders">[out_DtMinMaxMedWithHeaders]</OutArgument>
           </ui:InvokeCode.Arguments>
         </ui:InvokeCode>
       </TryCatch.Try>
@@ -109,6 +105,6 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;DtWithHeaders_AddTo workflow has ended.&quot;]" />
+    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;DtMinMaxMedwithHeaders_Create workflow has ended.&quot;]" />
   </Sequence>
 </Activity>

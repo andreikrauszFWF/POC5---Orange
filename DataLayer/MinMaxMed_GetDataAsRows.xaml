@@ -2,13 +2,14 @@
   <x:Members>
     <x:Property Name="in_DtSourceData" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_Type" Type="InArgument(x:String)" />
-    <x:Property Name="out_DtMinMaxMedType" Type="OutArgument(sd:DataTable)" />
-    <x:Property Name="out_DtForDepMed" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_MinList" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="out_MaxList" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="out_MedList" Type="OutArgument(scg:List(x:String))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>567.333333333333,890</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1207.33333333333,890</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>MinMaxMed_Get_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -82,20 +83,13 @@
     <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;DtForEachType_Create workflow has started.&quot;]" />
     <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,402" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Console.WriteLine(&quot;Before var declarations&quot;)&#xD;&#xA;&#xD;&#xA;Dim colList As New List(Of Double)&#xD;&#xA;Dim minList As  New List(Of String)&#xD;&#xA;Dim maxList  As  New List(Of String)&#xD;&#xA;Dim medList As  New List(Of String)&#xD;&#xA;Dim indexColumn As New Int32&#xD;&#xA;Dim medindex As New Int32&#xD;&#xA;&#xD;&#xA;indexColumn = 3&#xD;&#xA;&#xD;&#xA;Console.WriteLine(&quot;After var declarations&quot;)&#xD;&#xA;Console.WriteLine(&quot;Before creating rows&quot;)&#xD;&#xA;&#xD;&#xA;minList.Add(&quot;&quot;)&#xD;&#xA;minList.Add(&quot;MIN&quot;)&#xD;&#xA;maxList.Add(in_Type)&#xD;&#xA;maxList.Add(&quot;MAX&quot;)&#xD;&#xA;medList.Add(&quot;&quot;)&#xD;&#xA;medList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;Console.WriteLine(&quot;After creating rows&quot;)&#xD;&#xA;Console.WriteLine(&quot;Before while loop&quot;)&#xD;&#xA;&#xD;&#xA;While  indexColumn &lt; in_DtSourceData.Columns.Count&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before For Loop&quot;)&#xD;&#xA;&#x9;For Each row As DataRow In in_DtSourceData.AsEnumerable.Skip(2)&#xD;&#xA;&#x9;&#x9;&#x9;colList.Add(CDbl(row(indexColumn)))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before For Loop&quot;)&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before sort list&quot;)&#xD;&#xA;&#x9;colList.Sort&#xD;&#xA;&#x9;minList.Add(colList.Min.ToString)&#xD;&#xA;&#x9;maxList.Add(colList.Max.ToString)&#xD;&#xA;&#x9;Console.WriteLine(&quot;After sort list&quot;)&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before If statement&quot;)&#xD;&#xA;&#x9;If colList.Count &lt; 2 Then&#xD;&#xA;&#x9;&#x9;medList.Add(CStr(colList(0)))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before Else If&quot;)&#xD;&#xA;&#x9;If colList.Count Mod 2 = 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;medList.Add(CStr((colList(medIndex) + colList(medindex -1))/2))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before Else&quot;)&#xD;&#xA;&#x9;If colList.Count Mod 2 &lt;&gt; 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;medList.Add(CStr(colList(medIndex)))&#xD;&#xA;&#x9;Console.WriteLine(&quot;Before End If&quot;)&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;indexColumn = indexColumn + 1&#xD;&#xA;&#x9;Console.WriteLine(&quot;After If statement&quot;)&#xD;&#xA;&#x9;&#xD;&#xA;End While&#xD;&#xA;&#xD;&#xA;Console.WriteLine(&quot;After while loop&quot;)&#xD;&#xA;&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add(minList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add1&quot;)&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add(maxList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add2&quot;)&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add(medList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add3&quot;)&#xD;&#xA;out_DtMinMaxMedForType.Rows.Add()&#xD;&#xA;Console.WriteLine(&quot;add4&quot;)&#xD;&#xA;&#xD;&#xA;out_DtForDepMed.Rows.Add(medList.ToArray)&#xD;&#xA;Console.WriteLine(&quot;add5&quot;)" DisplayName="Get min max med for each column and save to new DT" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim colList As New List(Of Double)&#xD;&#xA;Dim indexColumn As New Int32&#xD;&#xA;Dim medindex As New Int32&#xD;&#xA;&#xD;&#xA;indexColumn = 3&#xD;&#xA;out_MinList = New List(Of String)&#xD;&#xA;out_MaxList = New List(Of String)&#xD;&#xA;out_MedList = New List(Of String)&#xD;&#xA;&#xD;&#xA;out_MinList.Add(&quot;&quot;)&#xD;&#xA;out_MinList.Add(&quot;MIN&quot;)&#xD;&#xA;out_MaxList.Add(in_Type)&#xD;&#xA;out_MaxList.Add(&quot;MAX&quot;)&#xD;&#xA;out_MedList.Add(&quot;&quot;)&#xD;&#xA;out_MedList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;While  indexColumn &lt; in_DtSourceData.Columns.Count&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;For Each row As DataRow In in_DtSourceData.AsEnumerable&#xD;&#xA;&#x9;&#x9;&#x9;colList.Add(CDbl(row(indexColumn)))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#xD;&#xA;&#x9;colList.Sort&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;out_MinList.Add(CStr(colList.Min))&#xD;&#xA;&#x9;out_MaxList.Add(CStr(colList.Max))&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;If colList.Count Mod 2 = 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;out_MedList.Add(CStr((colList(medIndex) + colList(medindex -1))/2))&#xD;&#xA;&#x9;Else If colList.Count Mod 2 &lt;&gt; 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;out_MedList.Add(CStr(colList(medIndex)))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;indexColumn = indexColumn + 1&#xD;&#xA;&#x9;colList.RemoveRange(0, colList.Count - 1)&#xD;&#xA;&#xD;&#xA;End While" DisplayName="Get min max med for each column and save to new DT" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
           <ui:InvokeCode.Arguments>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">
-              <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_DtSourceData" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_Type">
-              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Type" />
-            </InArgument>
-            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMinMaxMedForType">
-              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_DtMinMaxMedType" />
-            </OutArgument>
-            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForDepMed">
-              <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_DtForDepMed" />
-            </OutArgument>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">[in_DtSourceData]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Type">[in_Type]</InArgument>
+            <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_MinList">[out_MinList]</OutArgument>
+            <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_MaxList">[out_MaxList]</OutArgument>
+            <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_MedList">[out_MedList]</OutArgument>
           </ui:InvokeCode.Arguments>
         </ui:InvokeCode>
       </TryCatch.Try>
