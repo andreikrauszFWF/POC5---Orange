@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1207.33333333333,890</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1208,879.2</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>MinMaxMed_Get_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -73,17 +73,17 @@
       <AssemblyReference>NPOI</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow to get the min, max, and median for each column in a given data table. After geting the values, we store each one in  a new data row for each kind (min, max med), then add each row to a new DT out argument." DisplayName="MinMaxMed_Get" sap:VirtualizedContainerService.HintSize="480.666666666667,825.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow to get the min, max, and median for each column in a given data table. After geting the values, we store each one in  a new data row for each kind (min, max med), then add each row to a new DT out argument." DisplayName="MinMaxMed_Get" sap:VirtualizedContainerService.HintSize="478.4,814.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;DtForEachType_Create workflow has started.&quot;]" />
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438.666666666667,402" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="436.8,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;DtForEachType_Create workflow has started.&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="436.8,396" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim colList As New List(Of Double)&#xD;&#xA;Dim indexColumn As New Int32&#xD;&#xA;Dim medindex As New Int32&#xD;&#xA;&#xD;&#xA;indexColumn = 3&#xD;&#xA;out_MinList = New List(Of String)&#xD;&#xA;out_MaxList = New List(Of String)&#xD;&#xA;out_MedList = New List(Of String)&#xD;&#xA;&#xD;&#xA;out_MinList.Add(&quot;&quot;)&#xD;&#xA;out_MinList.Add(&quot;MIN&quot;)&#xD;&#xA;out_MaxList.Add(in_Type)&#xD;&#xA;out_MaxList.Add(&quot;MAX&quot;)&#xD;&#xA;out_MedList.Add(&quot;&quot;)&#xD;&#xA;out_MedList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;While  indexColumn &lt; in_DtSourceData.Columns.Count&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;For Each row As DataRow In in_DtSourceData.AsEnumerable&#xD;&#xA;&#x9;&#x9;&#x9;colList.Add(CDbl(row(indexColumn)))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#xD;&#xA;&#x9;colList.Sort&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;out_MinList.Add(CStr(colList.Min))&#xD;&#xA;&#x9;out_MaxList.Add(CStr(colList.Max))&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;If colList.Count Mod 2 = 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;out_MedList.Add(CStr((colList(medIndex) + colList(medindex -1))/2))&#xD;&#xA;&#x9;Else If colList.Count Mod 2 &lt;&gt; 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;out_MedList.Add(CStr(colList(medIndex)))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;indexColumn = indexColumn + 1&#xD;&#xA;&#x9;colList.RemoveRange(0, colList.Count - 1)&#xD;&#xA;&#xD;&#xA;End While" DisplayName="Get min max med for each column and save to new DT" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim colList As New List(Of Double)&#xD;&#xA;Dim indexColumn As New Int32&#xD;&#xA;Dim medindex As New Int32&#xD;&#xA;&#xD;&#xA;indexColumn = 3&#xD;&#xA;out_MinList = New List(Of String)&#xD;&#xA;out_MaxList = New List(Of String)&#xD;&#xA;out_MedList = New List(Of String)&#xD;&#xA;&#xD;&#xA;out_MinList.Add(&quot;&quot;)&#xD;&#xA;out_MinList.Add(&quot;MIN&quot;)&#xD;&#xA;out_MaxList.Add(in_Type)&#xD;&#xA;out_MaxList.Add(&quot;MAX&quot;)&#xD;&#xA;out_MedList.Add(&quot;&quot;)&#xD;&#xA;out_MedList.Add(&quot;MED&quot;)&#xD;&#xA;&#xD;&#xA;While  indexColumn &lt; in_DtSourceData.Columns.Count&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;For Each row As DataRow In in_DtSourceData.AsEnumerable&#xD;&#xA;&#x9;&#x9;&#x9;colList.Add(CDbl(row(indexColumn)))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#xD;&#xA;&#x9;colList.Sort&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;out_MinList.Add(CStr(colList.Min))&#xD;&#xA;&#x9;out_MaxList.Add(CStr(colList.Max))&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;If colList.Count Mod 2 = 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;out_MedList.Add(CStr((colList(medIndex) + colList(medindex -1))/2))&#xD;&#xA;&#x9;Else If colList.Count Mod 2 &lt;&gt; 0 Then&#xD;&#xA;&#x9;&#x9;medIndex = CInt(colList.Count / 2)&#xD;&#xA;&#x9;&#x9;out_MedList.Add(CStr(colList(medIndex)))&#xD;&#xA;&#x9;End If&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;indexColumn = indexColumn + 1&#xD;&#xA;&#x9;colList.RemoveRange(0, colList.Count - 1)&#xD;&#xA;&#xD;&#xA;End While" DisplayName="Get min max med for each column and save to new DT" sap:VirtualizedContainerService.HintSize="333.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
           <ui:InvokeCode.Arguments>
             <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">[in_DtSourceData]</InArgument>
             <InArgument x:TypeArguments="x:String" x:Key="in_Type">[in_Type]</InArgument>
@@ -94,7 +94,7 @@
         </ui:InvokeCode>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -105,11 +105,11 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[exception.InnerException.ToString]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[exception.InnerException.ToString]" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="438.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;DtForEachType_Create workflow has ended.&quot;]" />
+    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="436.8,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;DtForEachType_Create workflow has ended.&quot;]" />
   </Sequence>
 </Activity>

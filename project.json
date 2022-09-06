@@ -4,9 +4,12 @@
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.12.3]",
+    "UiPath.Mail.Activities": "[1.17.0-preview]",
     "UiPath.System.Activities": "[22.4.4]",
     "UiPath.Testing.Activities": "[22.4.3]",
-    "UiPath.UIAutomation.Activities": "[22.4.7]"
+    "UiPath.UIAutomation.Activities": "[22.4.7]",
+    "UiPathTeam.SharePoint.Activities": "[1.7.0]",
+    "UiPathTeam.UnZipFile.Activities": "[1.4.0]"
   },
   "webServices": [],
   "entitiesStores": [],
@@ -112,6 +115,12 @@
         "testCaseId": "8ce08961-ed19-4a3e-b9b2-9441e5c96b60",
         "testCaseType": "TestCase",
         "fileName": "Tests\\TestCases\\TestCase_MinMaxMed_GetDataAsRows.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "88eeb72e-241e-4013-8c63-c8575b128586",
+        "testCaseType": "TestCase",
+        "fileName": "ServiceLayer\\TestCase_SharePoint_UploadZip.xaml"
       }
     ],
     "modernBehavior": false
