@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1207.33333333333,817.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>824,696</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Extracted_RemoveRows_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -72,27 +72,22 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow to remove rows and columns by specified rules. &#xA;It eliminates rows that have value &gt; 0 in maternal / maternity columns and those that where column &quot;nr ore luna&quot; = 0. &#xA;For each row, it changes the value of column &quot;PARTE VARIABILA NET&quot; to 0 if the initial value is below 99.99.&#xA;It keeps only the columns specified in the config file." DisplayName="Workflow to Remove Rows from Extracted Data Table" sap:VirtualizedContainerService.HintSize="376,637.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow to remove rows and columns by specified rules. &#xA;It eliminates rows that have value &gt; 0 in maternal / maternity columns and those that where column &quot;nr ore luna&quot; = 0. &#xA;For each row, it changes the value of column &quot;PARTE VARIABILA NET&quot; to 0 if the initial value is below 99.99.&#xA;It keeps only the columns specified in the config file." DisplayName="Workflow to Remove Rows from Extracted Data Table" sap:VirtualizedContainerService.HintSize="375.2,631.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Filter Rows and Columns workflow has started.&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'VB.NET code for keeping only rows that have the following conditions: CM MATERNITATE = 0 and CM RISC MATERNAL = 0 and NR ORE LUNA &gt; 0 and CUUI &lt;&gt; &quot;&quot;;&#xD;&#xA;io_DtExtractedData = io_DtExtractedData.AsEnumerable.Where(Function(row) CInt(row(&quot;CM MATERNITATE&quot;)) = 0 AndAlso CInt(row(&quot;CM RISC MATERNAL&quot;)) = 0 AndAlso CInt(row(&quot;NR ORE LUNA&quot;)) &gt; 0 AndAlso row(&quot;CUI&quot;) IsNot &quot;&quot;).CopyToDataTable&#xD;&#xA;&#xD;&#xA;'VB.NET code to modify value of column &quot;PARTE VARIABILA NET&quot; to 0 if the initial value is between 0 and 99,99;&#xD;&#xA;For Each row As DataRow In io_DtExtractedData.Rows&#xD;&#xA;&#x9;If CInt(row(&quot;PARTE VARIABILA NET&quot;)) &lt; 100 AndAlso CInt(row(&quot;PARTE VARIABILA NET&quot;)) &gt; 0 Then&#xD;&#xA;&#x9;&#x9;row(&quot;PARTE VARIABILA NET&quot;) = 0&#xD;&#xA;&#x9;End If&#xD;&#xA;Next&#xD;&#xA;'io_DtExtractedData = io_DtExtractedData.AsEnumerable.WhereIf(Function(row), CInt(row(&quot;PARTE VARIABILA NET&quot;)) &lt; 100 AndAlso CInt(row(&quot;PARTE VARIABILA NET&quot;)) &gt; 0,  row(&quot;PARTE VARIABILA NET&quot;) = 0).CopyToDataTable&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;'VB.NET code to keep only the columns specified in the config file;&#xD;&#xA;Dim DtTempDataTable As DataTable&#xD;&#xA;DtTempDataTable = io_DtExtractedData.Copy&#xD;&#xA;For Each column As DataColumn In DtTempDataTable.Columns&#xD;&#xA;&#x9;If Not in_ColumnsToBeKept.ToString.ToLower.Trim.Split(&quot;,&quot;c).Contains(column.ColumnName.ToLower.Trim) Then&#xD;&#xA;&#x9;&#x9;io_DtExtractedData.Columns.Remove(column.ColumnName)&#xD;&#xA;&#x9;End If&#xD;&#xA;Next&#xD;&#xA;'For Each column As DataColumn In DtTempDataTable.Columns.Count - 1 To 0 Step -1&#xD;&#xA;&#x9;'If Not in_ColumnsToBeKept.ToString.ToLower.Trim.Split(&quot;,&quot;c).Contains(column.ColumnName.ToLower.Trim) Then&#xD;&#xA;&#x9;&#x9;'io_DtExtractedData.Columns.Remove(column.ColumnName)&#xD;&#xA;'Next&#xD;&#xA;'For Each column As DataColumn In DtTempDataTable.Columns.Count - 1 To 0 Step -1&#xD;&#xA;&#x9;'io_DtExtractedData = io_DtExtractedData.Columns.Add(column)" DisplayName="Invoke code used for filtering the data table" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:LogMessage DisplayName="Workflow Start" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Filter Rows and Columns workflow has started.&quot;]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="'VB.NET code for keeping only rows that have the following conditions: CM MATERNITATE = 0 and CM RISC MATERNAL = 0 and NR ORE LUNA &gt; 0 and CUUI &lt;&gt; &quot;&quot;;&#xD;&#xA;io_DtExtractedData = io_DtExtractedData.AsEnumerable.Where(Function(row) CInt(row(&quot;CM MATERNITATE&quot;)) = 0 AndAlso CInt(row(&quot;CM RISC MATERNAL&quot;)) = 0 AndAlso CInt(row(&quot;NR ORE LUNA&quot;)) &gt; 0 AndAlso row(&quot;CUI&quot;) IsNot &quot;&quot;).CopyToDataTable&#xD;&#xA;&#xD;&#xA;'VB.NET code to modify value of column &quot;PARTE VARIABILA NET&quot; to 0 if the initial value is between 0 and 99,99;&#xD;&#xA;For Each row As DataRow In io_DtExtractedData.Rows&#xD;&#xA;&#x9;If CInt(row(&quot;PARTE VARIABILA NET&quot;)) &lt; 100 AndAlso CInt(row(&quot;PARTE VARIABILA NET&quot;)) &gt; 0 Then&#xD;&#xA;&#x9;&#x9;row(&quot;PARTE VARIABILA NET&quot;) = 0&#xD;&#xA;&#x9;End If&#xD;&#xA;Next&#xD;&#xA;'io_DtExtractedData = io_DtExtractedData.AsEnumerable.Where(Function(row), CInt(row(&quot;PARTE VARIABILA NET&quot;)) &lt; 100 AndAlso CInt(row(&quot;PARTE VARIABILA NET&quot;)) &gt; 0,  row(&quot;PARTE VARIABILA NET&quot;) = 0).CopyToDataTable&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;'VB.NET code to keep only the columns specified in the config file;&#xD;&#xA;Dim DtTempDataTable As DataTable&#xD;&#xA;DtTempDataTable = io_DtExtractedData.Copy&#xD;&#xA;For Each column As DataColumn In DtTempDataTable.Columns&#xD;&#xA;&#x9;If Not in_ColumnsToBeKept.ToString.ToLower.Trim.Split(&quot;,&quot;c).Contains(column.ColumnName.ToLower.Trim) Then&#xD;&#xA;&#x9;&#x9;io_DtExtractedData.Columns.Remove(column.ColumnName)&#xD;&#xA;&#x9;End If&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;'DtTempDataTable.DefaultView.ToTable()" DisplayName="Invoke code used for filtering the data table" sap:VirtualizedContainerService.HintSize="333.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
-        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtExtractedData">
-          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_DtExtractedData" />
-        </InOutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ColumnsToBeKept">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ListOfColumnsToBeKept" />
-        </InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtExtractedData">[io_DtExtractedData]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ColumnsToBeKept">[in_ListOfColumnsToBeKept]</InArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Filter Rows and Columns workflow has ended.&quot;]" />
+    <ui:LogMessage DisplayName="Workflow End" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Filter Rows and Columns workflow has ended.&quot;]" />
   </Sequence>
 </Activity>
