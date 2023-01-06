@@ -1,0 +1,257 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_DtSourceData" Type="InArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1208,3608.8</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="31">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="34">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="836,3544" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtForCurrentCUI" />
+      <Variable x:TypeArguments="scg1:HashSet(x:String)" Name="hashsetForType" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtMedForDepartment" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtMinMaxMedForCUI" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="794.4,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Create datatable containg only rows with current CUI" sap:VirtualizedContainerService.HintSize="794.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="DataLayer\DtForEachType_Create.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">[in_DtSourceData]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ColumnName">CUI</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ColumnValue">[in_TransactionItem]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForGivenType">[dtForCurrentCUI]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtForCurrentCUI]" DisplayName="Write to Companii.xlsx (sheet per CUI)" sap:VirtualizedContainerService.HintSize="794.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[in_TransactionItem]" WorkbookPath="[in_Config(&quot;CompaniiPath&quot;).ToString]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Create DT to which we merge MinMaxMed for this CUI" sap:VirtualizedContainerService.HintSize="794.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="DataLayer\DtMinMaxMedwithHeaders_Create.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtToBeCloned">[dtForCurrentCUI]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMinMaxMedWithHeaders">[dtMinMaxMedForCUI]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_DtMedForDepartment = in_DtMinMaxMed.Copy&#xD;&#xA;out_DtMedForDepartment.Columns.Remove(&quot;Value&quot;)&#xD;&#xA;out_DtMedForDepartment.Columns.Remove(&quot;CUI&quot;)&#xD;&#xA;" DisplayName="Create DT to which we merge Med for Departments" sap:VirtualizedContainerService.HintSize="794.4,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtMedForDepartment">[dtMedForDepartment]</OutArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtMinMaxMed">[dtMinMaxMedForCUI]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each type in ListOfTypes(CUI,DEP,SUBDEP,FUNCT)" sap:VirtualizedContainerService.HintSize="794.4,1496" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_Config(&quot;ListOfTypes&quot;).ToString.Split(&quot;,&quot;c)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="type" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="601.6,1371.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dtForCurrentSubtype" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Create a hashset for each of the types" sap:VirtualizedContainerService.HintSize="560,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="DataLayer\HashsetForEachType.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">[dtForCurrentCUI]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Type">[type.ToString]</InArgument>
+                <OutArgument x:TypeArguments="scg1:HashSet(x:String)" x:Key="out_HashsetForType">[hashsetForType]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each  subtype in the current hashset for type" sap:VirtualizedContainerService.HintSize="560,1124.8" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[hashsetForType]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="typename" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="524.8,1000" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="scg:List(x:String)" Name="minList" />
+                      <Variable x:TypeArguments="scg:List(x:String)" Name="maxList" />
+                      <Variable x:TypeArguments="scg:List(x:String)" Name="medList" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Create Dt with only rows that contain current subtype" sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="DataLayer\DtForEachType_Create.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">[dtForCurrentCUI]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_ColumnName">[type.ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_ColumnValue">[typename.ToString]</InArgument>
+                        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_DtForGivenType">[dtForCurrentSubtype]</OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Build a list for each of MIN, MAX, MED, list that will act as row" sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="DataLayer\MinMaxMed_GetDataAsRows.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_DtSourceData">[dtForCurrentSubtype]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Type">[typename.ToString]</InArgument>
+                        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_MinList">[minList]</OutArgument>
+                        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_MaxList">[maxList]</OutArgument>
+                        <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_MedList">[medList]</OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Add min max med lists (as rows) to DT with headers" sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataLayer\DtWithHeaders_AddTo.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MaxList">[maxList]</InArgument>
+                        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MinList">[minList]</InArgument>
+                        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MedList">[medList]</InArgument>
+                        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtMinMaxMedForCUI">[dtMinMaxMedForCUI]</InOutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <If Condition="[type.ToString.Equals(&quot;Departament&quot;)]" DisplayName="If type is Department, we add Med List (as row) to DtMedForDepartment" sap:VirtualizedContainerService.HintSize="483.2,446.4" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="375.2,257.6" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeCode ContinueOnError="{x:Null}" Code="in_MedList.Remove(&quot;MED&quot;)&#xD;&#xA;in_MedList.RemoveAt(in_MedList.Count - 1)&#xD;&#xA;In_MedList(0) = in_TypeName&#xD;&#xA;io_DtMedForDepartment.Rows.RemoveAt(0)&#xD;&#xA;io_DtMedForDepartment.Rows.Add(in_MedList.ToArray)&#xD;&#xA;" DisplayName="Code to add to DtMedForDepartment" sap:VirtualizedContainerService.HintSize="333.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+                            <ui:InvokeCode.Arguments>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtMedForDepartment">[dtMedForDepartment]</InOutArgument>
+                              <InArgument x:TypeArguments="scg:List(x:String)" x:Key="in_MedList">[medList]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_TypeName">[typename.ToString]</InArgument>
+                            </ui:InvokeCode.Arguments>
+                          </ui:InvokeCode>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap:VirtualizedContainerService.HintSize="200,84.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <If Condition="[File.Exists(in_Config(&quot;MinMaxMedPath&quot;).ToString)]" DisplayName="If  MinMAxMed.xlsx file exists, append DT to it, otherwise create the file and after that append to it." sap:VirtualizedContainerService.HintSize="794.4,368" sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="375.2,208.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:AppendRange DataTable="[dtMinMaxMedForCUI]" DisplayName="Append dtMinMaxMed  to  MinMAxMed.xlsx / &quot;centralizator&quot;" sap:VirtualizedContainerService.HintSize="333.6,116" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="centralizator" WorkbookPath="[in_Config(&quot;MinMaxMedPath&quot;).ToString]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="375.2,208.8" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtMinMaxMedForCUI]" DisplayName="Write dtMinMaxMed  to  MinMAxMed.xlsx / &quot;centralizator&quot;" sap:VirtualizedContainerService.HintSize="333.6,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="centralizator" WorkbookPath="[in_Config(&quot;MinMaxMedPath&quot;).ToString]" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtMinMaxMedForCUI]" DisplayName="Write dtMinMaxMed  to  MinMAxMed.xlsx / &quot;sheet CUI&quot;" sap:VirtualizedContainerService.HintSize="794.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="[in_TransactionItem]" WorkbookPath="[in_Config(&quot;MinMaxMedPath&quot;).ToString]" />
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtMedForDepartment]" DisplayName="Write to  companiiGraph.xlsx" sap:VirtualizedContainerService.HintSize="794.4,116" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="[in_TransactionItem]" WorkbookPath="[in_Config(&quot;CompaniiGraphPath&quot;).ToString]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="io_DtForCurrentCUI.Reset&#xA;io_DtMinMaxMedForCUI.Reset&#xA;io_DtMedForDepartmens.Reset" DisplayName="Reset all DT" sap:VirtualizedContainerService.HintSize="794.4,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+      <ui:InvokeCode.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtMinMaxMedForCUI">[dtMinMaxMedForCUI]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtForCurrentCUI">[dtForCurrentCUI]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_DtMedForDepartmens">[dtMedForDepartment]</InOutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Create PDF file with charts for each dep's median values" sap:VirtualizedContainerService.HintSize="794.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="ServiceLayer\Charts_Create.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathToCodeFile">[in_Config("CodeForGraphasTXTPath").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathToExcelDepMed">[in_Config("CompaniiGraphPath").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_pathPDFfolder">[in_Config("GraphsFolderPath").ToString]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>
